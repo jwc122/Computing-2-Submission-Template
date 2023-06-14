@@ -11,7 +11,7 @@ window.onload = function() {
 
 
 for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < columns; c++) {
+    for (let c = 0; c < columns ; c++) {
         let tile = document.createElement("div");
         tile.id = r.toString() + "-" + c.toString();
         let num = board[r][c];
@@ -20,7 +20,6 @@ for (let r = 0; r < rows; r++) {
     }
 }
 //create 2 to begin the game
-setTwo();
 setTwo();
 
 
