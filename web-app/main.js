@@ -14,7 +14,7 @@ board = [
 window.onload = function() {
     setGame();
 }
-
+// KEEP
 function setGame() {
     // board = [
     //     [2, 2, 2, 2],
@@ -45,31 +45,31 @@ function setGame() {
     }
 
     //create 2 to begin the game
-    board = setTwo(board);
+    board = Game_module.setTwo(board);
     updateBoard(board);
 
 }
-
+// KEEP
 document.addEventListener('keyup', (e) => {
     if (e.code == "ArrowLeft") {
         board = slideLeft(board);
-        board = setTwo(board);
+        board = Game_module.setTwo(board);
     }
     else if (e.code == "ArrowRight") {
         // slideRight();
         board = slideRight(board);
-        board = setTwo(board);
+        board = Game_module.setTwo(board);
     }
     else if (e.code == "ArrowUp") {
         // slideUp();
         board = slideUp(board);
-        board = setTwo(board);
+        board = Game_module.setTwo(board);
 
     }
     else if (e.code == "ArrowDown") {
         // slideDown();
         board = slideDown(board);
-        board = setTwo(board);
+        board = Game_module.setTwo(board);
     }
 
     updateBoard(board);
@@ -106,27 +106,27 @@ function updateTile(tile, num) {
     }
 }
 
-function setTwo(uboard) {
-    if (!hasEmptyTile(uboard)) {
-        return uboard;
-    }
-    var rows = uboard.length;
-    var columns = uboard[0].length;
-    let found = false;
-    while (!found) {
-        //find random row and column to place a 2 in
-        let r = Math.floor(Math.random() * rows);
-        let c = Math.floor(Math.random() * columns);
-        if (uboard[r][c] == 0) {
-            uboard[r][c] = 2;
-            // let tile = document.getElementById(r.toString() + "-" + c.toString());//ERRORS
-            // tile.innerText = "2";
-            // tile.classList.add("x2");
-            found = true;
-        }
-    }
-    return uboard;
-}
+// function setTwo(uboard) {
+//     if (!hasEmptyTile(uboard)) {
+//         return uboard;
+//     }
+//     var rows = uboard.length;
+//     var columns = uboard[0].length;
+//     let found = false;
+//     while (!found) {
+//         //find random row and column to place a 2 in
+//         let r = Math.floor(Math.random() * rows);
+//         let c = Math.floor(Math.random() * columns);
+//         if (uboard[r][c] == 0) {
+//             uboard[r][c] = 2;
+//             // let tile = document.getElementById(r.toString() + "-" + c.toString());//ERRORS
+//             // tile.innerText = "2";
+//             // tile.classList.add("x2");
+//             found = true;
+//         }
+//     }
+//     return uboard;
+// }
 
 function hasEmptyTile(uboard) {
     let rows = uboard.length;
