@@ -1,7 +1,5 @@
-import Game_module from "../web-app/Game_module.js";
-import R from "../web-app/ramda.js";
-
-
+import Game_module from "../Game_module.js";
+import R from "../ramda.js";
 
 /* when all tiles are full - game over */
 
@@ -18,26 +16,74 @@ import R from "../web-app/ramda.js";
  * @param {Board} board The board to test.
  * @throws if the board fails any of the above conditions.
  */
-const throw_if_invalid = function (board) {
-    // Rectangular array.
+// const throw_if_invalid = function (board) {
+//     // Rectangular array.
+//     if (!Array.isArray(board) || !Array.isArray(board[0])) {
+//         throw new Error(
+//             "The board is not a 2D array: " + display_board(board)
+//         );
+//     }
+//     const height = board[0].length;
+//     const rectangular = R.all(
+//         (column) => column.length === height,
+//         board
+//     );
+//     if (!rectangular) {
+//         throw new Error(
+//             "The board is not rectangular: " + display_board(board)
+//         );
+//     }
+
+const throw_if_invalid = function(board) {
+    // 2-D array
     if (!Array.isArray(board) || !Array.isArray(board[0])) {
         throw new Error(
-            "The board is not a 2D array: " + display_board(board)
+            "The board is not a 2D array"
         );
     }
-    const height = board[0].length;
-    const rectangular = R.all(
-        (column) => column.length === height,
+    // Square - 4x4
+    const width = board.length;
+    if (!(width === 4)) {
+        throw new Error(
+            "The board length is not 4"
+        );
+    }
+    const square = R.all(
+        (column) => column.length === 4,
         board
     );
-    if (!rectangular) {
+    if (!square) {
         throw new Error(
-            "The board is not rectangular: " + display_board(board)
+            "The board is not square"
         );
     }
-
+    // All entries are powers of 2: (0), 2, 4, 8, 16, etc.
+    const is_valid_token = function(token) {
+        if (!Number.isInteger(token)) {
+            return false;
+        }
+        if (token === 0) {
+            return true;
+        } else {
+            return Math.pow(2, Math.round(Math.log(token) / Math.log(token)));
+        }
+    };
+    const contains_valid_tokens = R.pipe(
+        R.flatten,
+        R.all((slot) => is_valid_token(slot))
+    )(board);
+    if (!contains_valid_tokens) {
+        throw new Error(
+            "Board contains invalid tokens"
+        );
+    }
+}
 
 /* if the board is empty dont end the game - testing if game over*/
+describe("top level", function () {
+    it("item", function () {
+    });
+});
 
 /* an empty board has 0 cells - testing if the board is empty*/
 

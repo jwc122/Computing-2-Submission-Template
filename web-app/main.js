@@ -49,7 +49,7 @@ function setGame() {
     updateBoard(board);
 
 }
-// KEEP
+// Keep this here, doesnt work in api
 document.addEventListener('keyup', (e) => {
     if (e.code == "ArrowLeft") {
         board = Game_module.slideLeft(board);
